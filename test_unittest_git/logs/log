@@ -17,3 +17,9 @@
 2021-02-19 19:12:05,629 - test_login.py[line:36] - INFO - 用例-B端登录执行成功
 2021-02-19 19:12:06,439 - test_talentReview_list.py[line:65] - INFO - 用例-默认列表，执行成功
 2021-02-19 19:12:06,912 - test_talentReview_list.py[line:65] - INFO - 用例-列表搜索，执行成功
+2021-02-19 19:14:44,565 - test_login.py[line:42] - INFO - 用例-B端登录执行成功
+2021-02-19 19:14:45,395 - test_talentReview_list.py[line:71] - INFO - 用例-默认列表，执行成功
+2021-02-19 19:14:46,035 - test_talentReview_list.py[line:71] - INFO - 用例-列表搜索，执行成功
+2021-02-19 19:15:22,330 - test_login.py[line:42] - INFO - 用例-B端登录执行成功
+2021-02-19 19:15:23,241 - test_talentReview_list.py[line:71] - INFO - 用例-默认列表，执行成功
+2021-02-19 19:15:23,890 - test_talentReview_list.py[line:71] - INFO - 用例-列表搜索，执行成功
