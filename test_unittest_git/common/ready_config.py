@@ -4,6 +4,13 @@
 @Time : 2020/11/17 10:48 AM 
 @Author : Cc
 '''
+
+import sys
+import os
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = os.path.split(curPath)[0]
+sys.path.append(rootPath)
+
 import os
 from configparser import ConfigParser
 from test_unittest_git.common.ready_path import config_path
