@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试报告</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!--    页面样式-->
+    <style type="text/css">
+        /*标题样式*/
+        .title {
+            width: auto;
+            height: 60px;
+            text-align: center;
+            font: bolder 38px/60px "Microsoft YaHei UI";
+        }
+
+        /*汇总信息样式*/
+        .summary {
+            width: 90%;
+            position: absolute;
+            top: 120px;
+            margin-left: 5%;
+
+        }
+
+        .text-left {
+            font: bolder 20px/30px "Microsoft YaHei UI";
+        }
+
+        .left {
+            width: 50%;
+            float: left;
+
+        }
+
+        .right {
+            width: 50%;
+            float: right;
+
+        }
+
+        .desc {
+            float: left;
+            width: 100%;
+        }
+
+        .list-group-item span {
+            font: normal 16px/38px "Microsoft YaHei UI";
+            padding: 30px;
+
+        }
+
+        .list-group-item {
+            position: relative;
+            display: block;
+            padding: .4rem 1.25rem;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, .125);
+        }
+
+        /* 执行信息样式   */
+        .test_info {
+            width: 90%;
+            position: absolute;
+            top: 900px;
+            margin-left: 5%;
+
+            color: #28a745 !important;
+        }
+
+        .table td, th {
+            border: solid 2px rgba(9, 122, 51, 0.11) !important;
+            padding: 0;
+            line-height: 40px;
+            text-align: center;
+
+        }
+
+
+        select {
+            border: 0;
+            padding: 0;
+            margin: 0;
+            height: 2em;
+            width: 8em;
+            margin-left: 2em;
+        }
+
+        option {
+            text-align: center;
+            height: 36px;
+            font: none 18px/36px "Microsoft YaHei UI";
+            color: #28a745 !important;
+        }
+
+        .test_log {
+            background: rgba(163, 171, 189, 0.15);
+            width: 100%;
+            height: 50px;
+            border-top: none;
+            border-bottom: none;
+            display: none;
+            text-align: left;
+        }
+
+        .test_log td {
+            text-align: left;
+            height: 30px;
+            margin: 0;
+            padding-left: 3em;
+            padding-right:3em;
+            font: none 18px/24px "Microsoft YaHei UI";
+            color: #9e141a;
+        }
+
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /*    测试图表显示*/
+        .char {
+            width: 90%;
+            position: absolute;
+            top: 450px;
+            margin-left: 5%;
+            color: #28a745 !important;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<!--报告标题-->
+<div class="title text-success">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">测试报告</div>
+</div>
+
+<!--汇总信息-->
+<div class="summary">
+    <p class="text-left text-success">测试结果汇总</p>
+    <div class="left">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">测试人员</button>
+                <span class="text-dark">Cc</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">开始时间</button>
+                <span class="text-dark">2021-02-19 18:38:35</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">执行时间</button>
+                <span class="text-dark">1.61 S</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">用例总数</button>
+                <span class="text-dark">3</span>
+            </li>
+
+
+        </ul>
+    </div>
+    <div class="right">
+        <ul class="list-group">
+
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">成功用例</button>
+                <span class="text-success">3</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-danger">失败用例</button>
+                <span class="text-warning">0</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-warning">错误用例</button>
+                <span class="text-danger">0</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-secondary">跳过用例</button>
+                <span class="text-secondary">0</span>
+            </li>
+        </ul>
+    </div>
+    <div class="desc">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">描述信息</button>
+                <span class="text-secondary">test测试报告</span>
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+
+<!--测试图表-->
+<div class="char">
+    <p class="text-left text-success">图表展示</p>
+    <div id="char2" style="width: 49%;height: 400px;float: left"></div>
+    <div id="char" style="width: 49%;height: 400px ;float: left"></div>
+</div>
+
+<!--详细信息-->
+<div class="test_info">
+
+    <p class="text-left text-success">详细信息</p>
+    <div class="table_data">
+
+        <table class="table">
+            <thead class="bg-success text-light">
+            <tr>
+                <th scope="col" style="width: 5%;padding: 0">编号</th>
+                <th scope="col" style="width: 20%;padding: 0">
+                    <span>测试类</span>
+                    <select id="testClass">
+                        <option>所有</option>
+                        
+                            <option>Testlogin</option>
+                        
+                            <option>Test_relist</option>
+                        
+                    </select>
+
+                </th>
+
+                <th scope="col" style="width: 15%;padding: 0">测试方法</th>
+                <th scope="col" style="width: 20%;padding: 0">用例描述</th>
+                <th scope="col" style="width: 10%;padding: 0">执行时间</th>
+                <th scope="col" style="width: 20%;padding: 0">
+
+                    <span>执行结果</span>
+                    <select id="testResult">
+                        <option>所有</option>
+                        <option class="text-success">成功</option>
+                        <option class="text-danger">失败</option>
+                        <option class="text-warning">错误</option>
+                        <option class="text-info">跳过</option>
+                    </select>
+
+                </th>
+                <th scope="col" style="width: 10%;padding: 0">详细信息</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+                <tr>
+                    <td>1</td>
+                    <td class="Testlogin">Testlogin</td>
+                    <td>testlogin_01</td>
+                    <td>B端登录</td>
+                    <td>0.205s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>返回结果: {'err_msg': '', 'err_no': 0, 'results': {'isV3': 1, 'tenants': [], 'userData': {'token': 'user#b5609b97a9f6811e25ead1cd285cfae8', 'data': {'uid': '1226', 'company_id': '2959', 'account_name': '张飞', 'login_account': 'baolong.yang@ifchange.com', 'company_name': '上海逸橙信息科技有限公司', 'account_email': 'baolong.yang@ifchange.com', 'is_v3': 1, 'token_time': 1613731115}}}}
+--- Logging error ---
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/logging/handlers.py", line 70, in emit
+    self.doRollover()
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/logging/handlers.py", line 395, in doRollover
+    if self.backupCount > 0:
+TypeError: '>' not supported between instances of 'str' and 'int'
+Call stack:
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 890, in _bootstrap
+    self._bootstrap_inner()
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 926, in _bootstrap_inner
+    self.run()
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/concurrent/futures/thread.py", line 80, in _worker
+    work_item.run()
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/concurrent/futures/thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/suite.py", line 122, in run
+    test(result)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/case.py", line 676, in __call__
+    return self.run(*args, **kwds)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/case.py", line 628, in run
+    testMethod()
+  File "/Users/chenci/PycharmProjects/Cc_script/venv/lib/python3.7/site-packages/unittestreport/core/dataDriver.py", line 17, in wrapper
+    return func(self, params, *args, **kwargs)
+  File "/Users/chenci/PycharmProjects/Cc_script/test_apirunner_review/testcase/test_login.py", line 36, in testlogin
+    log.info("用例-{}执行成功".format(case['title']))
+Message: '用例-B端登录执行成功'
+Arguments: ()
+testlogin_01 (test_login.Testlogin)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>2</td>
+                    <td class="Test_relist">Test_relist</td>
+                    <td>test_list_01</td>
+                    <td>默认列表</td>
+                    <td>0.857s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>返回结果: {'err_msg': '', 'err_no': 0, 'results': {'data': [{'review_id': '36282731502533206', 'evaluation_task_id': '36282731720638042', 'all_aspects_id': 0, 'uid': 1226, 'name': '大大说', 'position_id': 0, 'level': 1, 'profile_id': '36282618606548217', 'type': 1, 'status': 3, 'created_at': '2021-02-04 11:38:29', 'profile_name': '行政岗位', 'select_staff': ['2308946910851072004', '2239859391960268804', '2213470187145216004', '2205748087605657604', '1991433392389324804', '1970103014134988804', '1960097456657612804', '1920038880788480004', '1915754124290048004', '1915714855131955204', '1915714006466560004', '1915713023361433604', '1907572423036108804', '1906437840893132804', '1889221064573337604', '1889221024006553604', '1889130071939891204'], 'select_staff_count': 17, 'select_evaluations': [8, 9, 12, 13, 14, 15, 16, 23, 22, 7, 3], 'finish_percent': 0, 'start_time': '2021-02-04 11:38', 'end_time': '2021-02-13 11:38', 'create_name': '张飞', 'is_start': 1}, {'review_id': '35121099819744183', 'evaluation_task_id': '35121099865879389', 'all_aspects_id': 0, 'uid': 1226, 'name': '213测试', 'position_id': 0, 'level': 2, 'profile_id': '16260071884355668', 'type': 1, 'status': 3, 'created_at': '2021-01-22 15:54:50', 'profile_name': '互联网 售前顾问', 'select_staff': ['1984815781661081604'], 'select_staff_count': 1, 'select_evaluations': [8, 9, 12, 13, 16, 22, 7, 3, 21], 'finish_percent': 0, 'start_time': '2021-01-22 15:55', 'end_time': '2021-01-24 20:59', 'create_name': '张飞', 'is_start': 1}, {'review_id': '33684031904186300', 'evaluation_task_id': '33684032061471145', 'all_aspects_id': 0, 'uid': 1226, 'name': '高潜培养2021', 'position_id': 0, 'level': 2, 'profile_id': '29125794833922698', 'type': 3, 'status': 1, 'created_at': '2021-01-06 19:13:16', 'profile_name': '研发管理经理', 'select_staff': ['1888878140860006404'], 'select_staff_count': 1, 'select_evaluations': [8, 9, 12, 13, 15, 16, 22, 7, 3, 21], 'finish_percent': 0, 'start_time': '2021-01-06 19:12', 'end_time': '2022-01-06 19:12', 'create_name': '张飞', 'is_start': 1}, {'review_id': '32206027014303764', 'evaluation_task_id': '32206027193614156', 'all_aspects_id': 0, 'uid': 1226, 'name': 'sherrytest', 'position_id': 0, 'level': 3, 'profile_id': '31675859411693595', 'type': 1, 'status': 3, 'created_at': '2020-12-21 11:41:00', 'profile_name': '客户服务', 'select_staff': ['1906437840893132804'], 'select_staff_count': 1, 'select_evaluations': [8, 13, 16, 23, 22, 7, 3], 'finish_percent': 0, 'start_time': '2020-12-21 11:41', 'end_time': '2020-12-22 11:47', 'create_name': '张飞', 'is_start': 1}, {'review_id': '31488091442147801', 'evaluation_task_id': '31488091794469781', 'all_aspects_id': 0, 'uid': 1226, 'name': '2020信息化 人才盘点', 'position_id': 0, 'level': 2, 'profile_id': '31487683029139285', 'type': 1, 'status': 3, 'created_at': '2020-12-13 13:29:44', 'profile_name': 'IT运维专员', 'select_staff': ['2213470187145216004'], 'select_staff_count': 1, 'select_evaluations': [8, 12, 13, 14, 16, 23, 22, 7, 3, 21], 'finish_percent': 0, 'start_time': '2020-12-14 13:29', 'end_time': '2020-12-31 13:29', 'create_name': '张飞', 'is_start': 1}, {'review_id': '28689922844031711', 'evaluation_task_id': '28689922986635515', 'all_aspects_id': 0, 'uid': 1226, 'name': '测试项目11-12', 'position_id': 0, 'level': 5, 'profile_id': '28682215314456062', 'type': 1, 'status': 3, 'created_at': '2020-11-12 16:14:02', 'profile_name': '产品经理朱嘉禾', 'select_staff': ['2358623315019776004'], 'select_staff_count': 1, 'select_evaluations': [8, 9, 12, 13, 14, 15, 16, 23, 22, 7, 3], 'finish_percent': 0, 'start_time': '2020-11-12 16:12', 'end_time': '2020-11-13 16:13', 'create_name': '张飞', 'is_start': 1}, {'review_id': '27887196028565593', 'evaluation_task_id': '27887196045343595', 'all_aspects_id': 442, 'uid': 1226, 'name': '测试项目2LY', 'position_id': 0, 'level': 3, 'profile_id': '26677795196270380', 'type': 1, 'status': 3, 'created_at': '2020-11-03 19:35:02', 'profile_name': '咨询顾问', 'select_staff': ['2333479386506035204'], 'select_staff_count': 1, 'select_evaluations': [8, 23, 22], 'finish_percent': 0, 'start_time': '2020-11-03 19:34', 'end_time': '2020-11-04 19:34', 'create_name': '张飞', 'is_start': 1}, {'review_id': '27887119612540505', 'evaluation_task_id': '27887119629318584', 'all_aspects_id': 440, 'uid': 1226, 'name': '测试项目1LY', 'position_id': 0, 'level': 4, 'profile_id': '26677795196270380', 'type': 1, 'status': 3, 'created_at': '2020-11-03 19:33:49', 'profile_name': '咨询顾问', 'select_staff': ['2333479399547289604'], 'select_staff_count': 1, 'select_evaluations': [], 'finish_percent': 100, 'start_time': '2020-11-03 19:33', 'end_time': '2020-11-04 19:34', 'create_name': '张飞', 'is_start': 1}, {'review_id': '27880981590473842', 'evaluation_task_id': '27880981607248953', 'all_aspects_id': 438, 'uid': 1226, 'name': '手机端测评', 'position_id': 0, 'level': 3, 'profile_id': '21074907250063934', 'type': 1, 'status': 3, 'created_at': '2020-11-03 17:56:16', 'profile_name': '产品经理测试0820', 'select_staff': ['1991433392389324804', '1915917257025126404'], 'select_staff_count': 2, 'select_evaluations': [23, 22, 3], 'finish_percent': 0, 'start_time': '2020-11-03 17:54', 'end_time': '2020-11-30 17:53', 'create_name': '张飞', 'is_start': 1}, {'review_id': '27852149591407598', 'evaluation_task_id': '27852149692069357', 'all_aspects_id': 431, 'uid': 1226, 'name': '测试项目1-1-1', 'position_id': 0, 'level': 5, 'profile_id': '24715695363225660', 'type': 1, 'status': 3, 'created_at': '2020-11-03 10:18:00', 'profile_name': 'Cc测试画像', 'select_staff': ['2205748087605657604'], 'select_staff_count': 1, 'select_evaluations': [8, 9, 12, 13, 14, 15, 16, 23, 22, 7, 3], 'finish_percent': 0, 'start_time': '2020-11-03 10:07', 'end_time': '2020-11-04 10:08', 'create_name': '张飞', 'is_start': 1}, {'review_id': '27786880440368227', 'evaluation_task_id': '27786880591362970', 'all_aspects_id': 424, 'uid': 1226, 'name': 'TTTTT', 'position_id': 0, 'level': 3, 'profile_id': '26677795196270380', 'type': 1, 'status': 3, 'created_at': '2020-11-02 17:00:34', 'profile_name': '咨询顾问', 'select_staff': ['2333479386506035204'], 'select_staff_count': 1, 'select_evaluations': [7], 'finish_percent': 0, 'start_time': '2020-11-02 17:01', 'end_time': '2020-11-03 17:00', 'create_name': '张飞', 'is_start': 1}, {'review_id': '27780478601818785', 'evaluation_task_id': '27780478715067878', 'all_aspects_id': 422, 'uid': 1226, 'name': 'ceshi222', 'position_id': 0, 'level': 3, 'profile_id': '26677795196270380', 'type': 1, 'status': 3, 'created_at': '2020-11-02 15:18:49', 'profile_name': '咨询顾问', 'select_staff': ['2239859391960268804'], 'select_staff_count': 1, 'select_evaluations': [], 'finish_percent': 0, 'start_time': '2020-11-02 15:18', 'end_time': '2020-11-03 15:18', 'create_name': '张飞', 'is_start': 1}, {'review_id': '27346281362915305', 'evaluation_task_id': '27346281379691821', 'all_aspects_id': 329, 'uid': 1226, 'name': '测试项目-1', 'position_id': 0, 'level': 5, 'profile_id': '24715695363225660', 'type': 1, 'status': 3, 'created_at': '2020-10-28 20:17:26', 'profile_name': 'Cc测试画像', 'select_staff': ['2308946910851072004', '2308946671290777604'], 'select_staff_count': 2, 'select_evaluations': [9, 23, 22, 3], 'finish_percent': 100, 'start_time': '2020-10-28 20:15', 'end_time': '2020-10-29 20:17', 'create_name': '张飞', 'is_start': 1}, {'review_id': '27344164703205046', 'evaluation_task_id': '27344164721031723', 'all_aspects_id': 327, 'uid': 1226, 'name': '测试优化-1', 'position_id': 0, 'level': 5, 'profile_id': '24715695363225660', 'type': 1, 'status': 3, 'created_at': '2020-10-28 19:43:47', 'profile_name': 'Cc测试画像', 'select_staff': ['2308946910851072004', '2308946671290777604'], 'select_staff_count': 2, 'select_evaluations': [9, 23, 22, 3], 'finish_percent': 100, 'start_time': '2020-10-28 19:35', 'end_time': '2020-10-29 19:43', 'create_name': '张飞', 'is_start': 1}, {'review_id': '27342334603589392', 'evaluation_task_id': '27342334714739085', 'all_aspects_id': 325, 'uid': 1226, 'name': '测试优化', 'position_id': 0, 'level': 5, 'profile_id': '24715695363225660', 'type': 1, 'status': 3, 'created_at': '2020-10-28 19:14:42', 'profile_name': 'Cc测试画像', 'select_staff': ['2308946910851072004', '2308946671290777604'], 'select_staff_count': 2, 'select_evaluations': [8, 9, 12, 13, 14, 15, 16, 23, 22, 7, 3], 'finish_percent': 100, 'start_time': '2020-10-28 19:13', 'end_time': '2020-10-29 19:14', 'create_name': '张飞', 'is_start': 1}, {'review_id': '27220520835510812', 'evaluation_task_id': '27220520968682206', 'all_aspects_id': 318, 'uid': 1226, 'name': '测试素质360过期', 'position_id': 0, 'level': 5, 'profile_id': '24715695363225660', 'type': 1, 'status': 3, 'created_at': '2020-10-27 10:58:32', 'profile_name': 'Cc测试画像', 'select_staff': ['2308946671290777604'], 'select_staff_count': 1, 'select_evaluations': [8, 13, 16, 23, 22, 7, 3], 'finish_percent': 0, 'start_time': '2020-10-27 18:41', 'end_time': '2020-10-27 11:02', 'create_name': '张飞', 'is_start': 1}, {'review_id': '27161681824085649', 'evaluation_task_id': '27161681841913336', 'all_aspects_id': 315, 'uid': 1226, 'name': '360测试项目10261921', 'position_id': 0, 'level': 3, 'profile_id': '26677795196270380', 'type': 1, 'status': 3, 'created_at': '2020-10-26 19:23:18', 'profile_name': '咨询顾问', 'select_staff': ['1889221049263718404'], 'select_staff_count': 1, 'select_evaluations': [8, 13, 16, 22, 7], 'finish_percent': 0, 'start_time': '2020-10-26 19:21', 'end_time': '2020-10-26 19:27', 'create_name': '张飞', 'is_start': 1}, {'review_id': '27159187734689362', 'evaluation_task_id': '27159187754612969', 'all_aspects_id': 313, 'uid': 1226, 'name': '测试项目123123123', 'position_id': 0, 'level': 5, 'profile_id': '27132188374891306', 'type': 1, 'status': 3, 'created_at': '2020-10-26 18:43:40', 'profile_name': 'GYHB中层干部', 'select_staff': ['2308947596698419204'], 'select_staff_count': 1, 'select_evaluations': [8, 13, 16, 23, 22, 7], 'finish_percent': 0, 'start_time': '2020-10-26 18:41', 'end_time': '2020-10-26 18:43', 'create_name': '张飞', 'is_start': 1}, {'review_id': '27158231076862917', 'evaluation_task_id': '27158231093640704', 'all_aspects_id': 311, 'uid': 1226, 'name': '啊实打实大师多', 'position_id': 0, 'level': 5, 'profile_id': '27132188374891306', 'type': 1, 'status': 3, 'created_at': '2020-10-26 18:28:27', 'profile_name': 'GYHB中层干部', 'select_staff': ['2308946671290777604'], 'select_staff_count': 1, 'select_evaluations': [8, 13, 16, 23, 22, 7], 'finish_percent': 0, 'start_time': '2020-10-26 18:25', 'end_time': '2020-10-26 18:29', 'create_name': '张飞', 'is_start': 1}, {'review_id': '27156505743619278', 'evaluation_task_id': '27156505760396622', 'all_aspects_id': 0, 'uid': 1226, 'name': 'X', 'position_id': 0, 'level': 4, 'profile_id': '26677795196270380', 'type': 1, 'status': 3, 'created_at': '2020-10-26 18:01:01', 'profile_name': '咨询顾问', 'select_staff': ['1953986232941772804'], 'select_staff_count': 1, 'select_evaluations': [3], 'finish_percent': 100, 'start_time': '2020-10-26 02:51', 'end_time': '2020-10-30 23:02', 'create_name': '张飞', 'is_start': 1}], 'pagination': {'page': 1, 'size': 20, 'total': 94}}}
+--- Logging error ---
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/logging/handlers.py", line 70, in emit
+    self.doRollover()
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/logging/handlers.py", line 395, in doRollover
+    if self.backupCount > 0:
+TypeError: '>' not supported between instances of 'str' and 'int'
+Call stack:
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 890, in _bootstrap
+    self._bootstrap_inner()
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 926, in _bootstrap_inner
+    self.run()
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/concurrent/futures/thread.py", line 80, in _worker
+    work_item.run()
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/concurrent/futures/thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/suite.py", line 122, in run
+    test(result)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/case.py", line 676, in __call__
+    return self.run(*args, **kwds)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/case.py", line 628, in run
+    testMethod()
+  File "/Users/chenci/PycharmProjects/Cc_script/venv/lib/python3.7/site-packages/unittestreport/core/dataDriver.py", line 17, in wrapper
+    return func(self, params, *args, **kwargs)
+  File "/Users/chenci/PycharmProjects/Cc_script/test_apirunner_review/testcase/test_talentReview_list.py", line 65, in test_list
+    log.info("用例-{}，执行成功".format(casedata['title']))
+Message: '用例-默认列表，执行成功'
+Arguments: ()
+test_list_01 (test_talentReview_list.Test_relist)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>3</td>
+                    <td class="Test_relist">Test_relist</td>
+                    <td>test_list_02</td>
+                    <td>列表搜索</td>
+                    <td>0.547s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>返回结果: {'err_msg': '', 'err_no': 0, 'results': {'data': [{'review_id': '20461028895651964', 'evaluation_task_id': '20461028826446382', 'all_aspects_id': 0, 'uid': 1226, 'name': '11111111', 'position_id': 0, 'level': 1, 'profile_id': '20440879514810656', 'type': 1, 'status': 3, 'created_at': '2020-08-13 20:19:17', 'profile_name': '制造业 研发', 'select_staff': ['2217078949149491204'], 'select_staff_count': 1, 'select_evaluations': [8, 9, 12, 13, 14, 15, 16, 23, 22, 7, 3, 21], 'finish_percent': 0, 'start_time': '2020-08-13 20:19', 'end_time': '2020-08-14 20:19', 'create_name': '张飞', 'is_start': 1}], 'pagination': {'page': 1, 'size': 20, 'total': 1}}}
+sql: SELECT * FROM `dsp_business_pool`.`dsp_talent_review` where evaluation_task_id = 20461028826446382;
+sql结果: [{'id': 75, 'review_id': 20461028895651964, 'evaluation_task_id': 20461028826446382, 'uid': 1226, 'company_id': 2959, 'name': '11111111', 'position_id': 0, 'level': 1, 'performance_year': 2020, 'industry': 0, 'function': 0, 'profile_id': 20440879514810656, 'type': 1, 'is_admin': 0, 'status': 0, 'profile_detail': '[{"weight":"10","name":"\\u7d20\\u8d28","id":1,"child":[{"id":"1_1","name":"\\u63a8\\u7406\\u5206\\u6790","score":4},{"id":"1_7","name":"\\u7075\\u6d3b\\u5e94\\u53d8","score":3},{"id":"1_10","name":"\\u5173\\u6ce8\\u7ec6\\u8282","score":3},{"id":"1_21","name":"\\u8425\\u9020\\u5ba2\\u6237\\u6587\\u5316","score":3},{"id":"1_22","name":"\\u4e3b\\u52a8\\u884c\\u52a8","score":4}],"edit":1,"required":1,"is_chosen":1},{"weight":"15","name":"\\u6280\\u80fd\\u8981\\u6c42","id":4,"child":[{"name":"\\u5e02\\u573a\\u7814\\u7a76","id":1209},{"name":"\\u4ea7\\u54c1\\u89c4\\u5212","id":1204},{"name":"\\u4ea7\\u54c1\\u5e02\\u573a\\u7b56\\u7565\\u5236\\u5b9a","id":1210},{"name":"\\u4ea7\\u54c1\\u5b9a\\u4ef7","id":1217},{"name":"\\u6570\\u636e\\u5206\\u6790","id":1218},{"name":"\\u4ea7\\u54c1\\u5f00\\u53d1\\u7ba1\\u7406","id":1219},{"name":"\\u4ea7\\u54c1\\u8bbe\\u8ba1","id":1203},{"name":"\\u4e13\\u4e1a\\u670d\\u52a1","id":1558}],"edit":1,"is_chosen":1},{"weight":"20","name":"\\u77e5\\u8bc6\\u8981\\u6c42","id":3,"child":[{"id":1214,"name":"\\u4ea7\\u54c1\\u4e0a\\u5e02\\u6d41\\u7a0b"},{"id":1215,"name":"\\u884c\\u4e1a\\u53d1\\u5c55\\u8d8b\\u52bf"},{"id":1216,"name":"\\u4ea7\\u54c1\\u6280\\u672f\\u77e5\\u8bc6"}],"edit":1,"is_chosen":1},{"weight":"40","name":"\\u804c\\u4e1a\\u4eba\\u683c","id":22,"child":[{"id":"22_2_3","name":"\\u8ba1\\u5212","score":0},{"id":"22_4_3","name":"\\u5408\\u4f5c","score":0},{"id":"22_3_1","name":"\\u597d\\u5b66","score":0},{"id":"22_3_2","name":"\\u521b\\u65b0","score":0},{"id":"22_3_3","name":"\\u72ec\\u7acb","score":0}],"is_chosen":1},{"weight":"80","name":"\\u5173\\u952e\\u5de5\\u4f5c\\u7ecf\\u5386","id":7,"child":[{"id":"7_13","name":"\\u4ea7\\u54c1\\/\\u670d\\u52a1\\u521b\\u65b0","score":0},{"id":"7_20","name":"\\u91cd\\u5927\\u9879\\u76ee","score":0},{"id":"7_4","name":"\\u5355\\u4e00\\u90e8\\u95e8\\u8d1f\\u8d23\\u4eba\\u7ba1\\u7406\\u7ecf\\u5386","score":0}],"is_chosen":1},{"weight":"100","name":"\\u793e\\u4f1a\\u52a8\\u673a","id":16,"child":[{"id":"16_2_1","name":"\\u6210\\u5c31\\u52a8\\u673a","score":0}],"is_chosen":1},{"weight":"120","name":"\\u60c5\\u7eea\\u667a\\u529b","id":8,"child":[{"id":"8_3_1","name":"\\u8c03\\u63a7\\u81ea\\u5df1\\u7684\\u60c5\\u7eea","score":0},{"id":"8_3_2","name":"\\u8c03\\u63a7\\u4ed6\\u4eba\\u7684\\u60c5\\u7eea","score":0}],"is_chosen":1},{"weight":"30","name":"\\u6f5c\\u529b","id":26,"child":[],"is_chosen":1},{"weight":"50","name":"\\u7ba1\\u7406\\u5b9e\\u8df5\\u80fd\\u529b","id":23,"child":[],"is_chosen":1},{"weight":"60","name":"\\u6279\\u5224\\u601d\\u7ef4","id":9,"child":[],"is_chosen":1},{"weight":"70","name":"\\u5de5\\u4f5c\\u9009\\u62e9\\u4ef7\\u503c\\u89c2","id":15,"child":[],"is_chosen":1},{"weight":"90","name":"\\u9886\\u5bfc\\u98ce\\u683c","id":13,"child":[],"is_chosen":1},{"weight":"110","name":"\\u7ec4\\u7ec7\\u5fe0\\u8bda","id":14,"child":[],"is_chosen":1},{"weight":"130","name":"\\u6027\\u683c\\u98ce\\u9669","id":12,"child":[],"is_chosen":1}]', 'updated_at': datetime.datetime(2020, 8, 13, 20, 19, 17), 'is_deleted': 0, 'created_at': datetime.datetime(2020, 8, 13, 20, 19, 17), 'all_aspects_id': 0, 'relative_perspective_config': ''}]
+--- Logging error ---
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/logging/handlers.py", line 70, in emit
+    self.doRollover()
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/logging/handlers.py", line 395, in doRollover
+    if self.backupCount > 0:
+TypeError: '>' not supported between instances of 'str' and 'int'
+Call stack:
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 890, in _bootstrap
+    self._bootstrap_inner()
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 926, in _bootstrap_inner
+    self.run()
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/concurrent/futures/thread.py", line 80, in _worker
+    work_item.run()
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/concurrent/futures/thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/suite.py", line 122, in run
+    test(result)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/case.py", line 676, in __call__
+    return self.run(*args, **kwds)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/case.py", line 628, in run
+    testMethod()
+  File "/Users/chenci/PycharmProjects/Cc_script/venv/lib/python3.7/site-packages/unittestreport/core/dataDriver.py", line 17, in wrapper
+    return func(self, params, *args, **kwargs)
+  File "/Users/chenci/PycharmProjects/Cc_script/test_apirunner_review/testcase/test_talentReview_list.py", line 65, in test_list
+    log.info("用例-{}，执行成功".format(casedata['title']))
+Message: '用例-列表搜索，执行成功'
+Arguments: ()
+test_list_02 (test_talentReview_list.Test_relist)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+
+            </tbody>
+        </table>
+    </div>
+
+    <div style="height: 200px"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
+<script>
+    var tbodyTr = $('tbody tr');
+    var testResult = $("#testResult");
+    var testClass = $("#testClass");
+    <!--    用例执行详细信息显示切换-->
+    $(".btn_info").click(function () {
+        $(this).parent().parent().next().toggle();
+
+    });
+    // 当选择用例类之后触发
+    testClass.change(function () {
+        var cls = $(this).val();
+        var res = testResult.val();
+        elementDisplay(cls, res);
+        sort()
+    });
+    testResult.change(function () {
+        var res = $(this).val();
+        var cls = testClass.val();
+        elementDisplay(cls, res);
+        sort()
+    });
+
+    function elementDisplay(cls, res) {
+        // 用例数据的显示
+        if (cls === "所有") {
+            if (res === "所有") {
+                tbodyTr.has('button').show();
+            } else if (res === '成功') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-success').show()
+
+            } else if (res === '失败') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-danger').show()
+
+            } else if (res === '错误') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-warning').show()
+
+            } else if (res === '跳过') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-info').show()
+            }
+        } else {
+            if (res === "所有") {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').show()
+            } else if (res === '成功') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-success').show()
+            } else if (res === '失败') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-danger').show()
+            } else if (res === '错误') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-warning').show()
+            } else if (res === '跳过') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-info').show()
+            }
+        }
+    }
+
+    function sort() {
+        //重新排列显示序号
+        // 选择所有可以见的tr
+        var visibleTr = tbodyTr.filter(":visible");
+
+        visibleTr.each(function (index, element) {
+            element.firstElementChild.innerHTML = index + 1;
+
+        })
+
+    }
+
+
+</script>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('char'));
+    var myChart2 = echarts.init(document.getElementById('char2'));
+    // 指定图表的配置项和数据
+    option = {
+        color: ['#00a10a', '#ddb518', 'rgba(204,46,41,0.73)', '#85898c'],
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b}: {c} ({d}%)'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 10,
+            data: ['通过', '失败', '错误', '跳过']
+        },
+        series: [
+            {
+                name: '测试结果',
+                type: 'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    {value: 3, name: '通过'},
+                    {value: 0, name: '失败'},
+                    {value: 0, name: '错误'},
+                    {value: 0, name: '跳过'}
+                ]
+            }
+        ]
+    };
+    option2 = {
+        tooltip: {
+            formatter: '{a} <br/>{b} : {c}%'
+        },
+        toolbox: {
+            feature: {
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        series: [
+            {
+                name: '测试结果',
+                type: 'gauge',
+                detail: {formatter: '100.00%'},
+                data: [{value: '100.00', name: '用例通过率'}],
+                axisLine: {
+                    lineStyle: {
+                        color: [
+                            [0.2, '#c20000'],
+                            [0.8, '#ddb518'],
+                            [1, '#00a10a']]
+                    }
+                }
+            }
+        ]
+    };
+
+
+    myChart2.setOption(option2);
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+
+</body>
+</html>
